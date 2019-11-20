@@ -23,7 +23,7 @@ namespace ShoeSelling.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public ActionResult Privacy()
         {
             return View();
         }
