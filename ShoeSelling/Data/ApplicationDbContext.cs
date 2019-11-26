@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ShoeSelling.Models;
 
 namespace ShoeSelling.Data
 {
@@ -12,5 +13,6 @@ namespace ShoeSelling.Data
             : base(options)
         {
         }
+        public DbSet<ShoeSelling.Models.Shoes> Shoes { get; set; }
     }
 }
