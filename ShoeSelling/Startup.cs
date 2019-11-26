@@ -12,6 +12,7 @@ using ShoeSelling.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShoeSelling.Models;
 
 namespace ShoeSelling
 {
@@ -30,10 +31,14 @@ namespace ShoeSelling
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            string DefaultConnection = @"Server=MERVE-PC\\SQLEXPRESS; Database = ShoeSelling; Trusted_Connection =true; ConnectRetryCount=0";
+            services.AddDbContext<ColorRepo>(options => options.UseSqlServer(DefaultConnection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
