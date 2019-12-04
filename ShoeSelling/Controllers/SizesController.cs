@@ -11,9 +11,9 @@ namespace ShoeSelling.Controllers
 {
     public class SizesController : Controller
     {
-        private readonly SizeRepo _context;
+        private readonly ShoesContext _context;
 
-        public SizesController(SizeRepo context)
+        public SizesController(ShoesContext context)
         {
             _context = context;
         }
@@ -21,7 +21,7 @@ namespace ShoeSelling.Controllers
         // GET: Sizes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SizeTable.ToListAsync());
+            return View(await _context.Size.ToListAsync());
         }
 
         // GET: Sizes/Details/5
@@ -32,7 +32,7 @@ namespace ShoeSelling.Controllers
                 return NotFound();
             }
 
-            var size = await _context.SizeTable
+            var size = await _context.Size
                 .FirstOrDefaultAsync(m => m.SizeId == id);
             if (size == null)
             {
@@ -72,7 +72,7 @@ namespace ShoeSelling.Controllers
                 return NotFound();
             }
 
-            var size = await _context.SizeTable.FindAsync(id);
+            var size = await _context.Size.FindAsync(id);
             if (size == null)
             {
                 return NotFound();
@@ -123,7 +123,7 @@ namespace ShoeSelling.Controllers
                 return NotFound();
             }
 
-            var size = await _context.SizeTable
+            var size = await _context.Size
                 .FirstOrDefaultAsync(m => m.SizeId == id);
             if (size == null)
             {
@@ -138,15 +138,15 @@ namespace ShoeSelling.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var size = await _context.SizeTable.FindAsync(id);
-            _context.SizeTable.Remove(size);
+            var size = await _context.Size.FindAsync(id);
+            _context.Size.Remove(size);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SizeExists(int id)
         {
-            return _context.SizeTable.Any(e => e.SizeId == id);
+            return _context.Size.Any(e => e.SizeId == id);
         }
     }
 }

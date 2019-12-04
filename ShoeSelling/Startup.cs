@@ -37,9 +37,10 @@ namespace ShoeSelling
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            string DefaultConnection = @"DESKTOP-G0S2RRH; Database = ShoeSelling; Trusted_Connection =true; ConnectRetryCount=0";
-            services.AddDbContext<ColorRepo>(options => options.UseSqlServer(DefaultConnection));
-            services.AddDbContext<SizeRepo>(options => options.UseSqlServer(DefaultConnection));
+       
+
+            services.AddDbContext<ShoesContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ShoesContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
