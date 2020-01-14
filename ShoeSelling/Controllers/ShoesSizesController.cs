@@ -9,22 +9,22 @@ using ShoeSelling.Models;
 
 namespace ShoeSelling.Controllers
 {
-    public class SizesController : Controller
+    public class ShoesSizesController : Controller
     {
         private readonly ShoesContext _context;
 
-        public SizesController(ShoesContext context)
+        public ShoesSizesController(ShoesContext context)
         {
             _context = context;
         }
 
-        // GET: Sizes
+        // GET: ShoesSizes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Size.ToListAsync());
+            return View(await _context.ShoesSize.ToListAsync());
         }
 
-        // GET: Sizes/Details/5
+        // GET: ShoesSizes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace ShoeSelling.Controllers
                 return NotFound();
             }
 
-            var size = await _context.Size
+            var shoesSize = await _context.ShoesSize
                 .FirstOrDefaultAsync(m => m.SizeId == id);
-            if (size == null)
+            if (shoesSize == null)
             {
                 return NotFound();
             }
 
-            return View(size);
+            return View(shoesSize);
         }
 
-        // GET: Sizes/Create
+        // GET: ShoesSizes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Sizes/Create
+        // POST: ShoesSizes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SizeId,Number")] Size size)
+        public async Task<IActionResult> Create([Bind("SizeId,EuNumber,UkNumber,UsNumber")] ShoesSize shoesSize)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(size);
+                _context.Add(shoesSize);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(size);
+            return View(shoesSize);
         }
 
-        // GET: Sizes/Edit/5
+        // GET: ShoesSizes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace ShoeSelling.Controllers
                 return NotFound();
             }
 
-            var size = await _context.Size.FindAsync(id);
-            if (size == null)
+            var shoesSize = await _context.ShoesSize.FindAsync(id);
+            if (shoesSize == null)
             {
                 return NotFound();
             }
-            return View(size);
+            return View(shoesSize);
         }
 
-        // POST: Sizes/Edit/5
+        // POST: ShoesSizes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SizeId,Number")] Size size)
+        public async Task<IActionResult> Edit(int id, [Bind("SizeId,EuNumber,UkNumber,UsNumber")] ShoesSize shoesSize)
         {
-            if (id != size.SizeId)
+            if (id != shoesSize.SizeId)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace ShoeSelling.Controllers
             {
                 try
                 {
-                    _context.Update(size);
+                    _context.Update(shoesSize);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SizeExists(size.SizeId))
+                    if (!ShoesSizeExists(shoesSize.SizeId))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace ShoeSelling.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(size);
+            return View(shoesSize);
         }
 
-        // GET: Sizes/Delete/5
+        // GET: ShoesSizes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace ShoeSelling.Controllers
                 return NotFound();
             }
 
-            var size = await _context.Size
+            var shoesSize = await _context.ShoesSize
                 .FirstOrDefaultAsync(m => m.SizeId == id);
-            if (size == null)
+            if (shoesSize == null)
             {
                 return NotFound();
             }
 
-            return View(size);
+            return View(shoesSize);
         }
 
-        // POST: Sizes/Delete/5
+        // POST: ShoesSizes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var size = await _context.Size.FindAsync(id);
-            _context.Size.Remove(size);
+            var shoesSize = await _context.ShoesSize.FindAsync(id);
+            _context.ShoesSize.Remove(shoesSize);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SizeExists(int id)
+        private bool ShoesSizeExists(int id)
         {
-            return _context.Size.Any(e => e.SizeId == id);
+            return _context.ShoesSize.Any(e => e.SizeId == id);
         }
     }
 }

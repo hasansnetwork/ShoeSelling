@@ -14,8 +14,8 @@ namespace ShoeSelling.Models
         {
         }
 
-        public DbSet<ShoeSelling.Models.Size> Size { get; set; }
-
         public DbSet<ShoeSelling.Models.Shoe> Shoe { get; set; }
+
+        public DbSet<ShoeSelling.Models.ShoesSize> ShoesSize { get; set; }
     }
 }

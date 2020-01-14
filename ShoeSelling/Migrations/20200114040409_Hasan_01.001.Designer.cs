@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoeSelling.Models;
 
 namespace ShoeSelling.Migrations
 {
     [DbContext(typeof(ShoesContext))]
-    partial class ShoesContextModelSnapshot : ModelSnapshot
+    [Migration("20200114040409_Hasan_01.001")]
+    partial class Hasan_01001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
